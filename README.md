@@ -1,6 +1,6 @@
-# logmd-plugin
+# logbook-plugin
 
-Claude Code plugins for [LogMD](https://github.com/open-logmd) vaults, published as a
+Claude Code plugins for [LogMD](https://github.com/logbook-md) vaults, published as a
 plugin marketplace.
 
 | Plugin | What it does |
@@ -10,7 +10,7 @@ plugin marketplace.
 ## Install
 
 ```sh
-claude plugin marketplace add open-logmd/logmd-plugin
+claude plugin marketplace add logbook-md/logbook-plugin
 claude plugin install logbook@logmd
 ```
 
