@@ -14,7 +14,8 @@ claude plugin marketplace add logbook-md/logbook-plugin
 claude plugin install logbook@logmd
 ```
 
-The plugin registers the vault's MCP server itself, from three environment variables.
+The plugin registers the vault's MCP server itself, as `logbook-mcp`, from three environment
+variables.
 Set them where Claude Code will see them (a shell profile, or `env` in
 `~/.claude/settings.json`) before starting a session:
 
@@ -29,6 +30,10 @@ The two Access variables may be left unset for a server that is not behind Acces
 writes anywhere else.
 
 Updates arrive with `claude plugin marketplace update logmd`.
+
+Up to 0.12 the server was registered as `logmd`. From 0.13 its tools are
+`mcp__logbook-mcp__*`, so a permission rule or instruction that names `mcp__logmd__*` needs
+the new prefix. The environment variables keep their `LOGMD_` names.
 
 ## What is in `logbook`
 

@@ -63,7 +63,7 @@ Two things it defers to in turn:
 
 ## Tools: use the MCP, not the filesystem
 
-The vault is remote: a logmd server, reached through the `logmd` MCP server this
+The vault is remote: a logmd server, reached through the `logbook-mcp` MCP server this
 plugin registers. There is no local copy, so `Read`/`Grep`/`Glob` cannot reach it at
 all — and even where a vault is on disk, the native tools skip the frontmatter,
 backlinks and attribution that `exec` returns per file. The mapping:

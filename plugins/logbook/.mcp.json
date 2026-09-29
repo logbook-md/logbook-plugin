@@ -1,6 +1,6 @@
 {
   "mcpServers": {
-    "logmd": {
+    "logbook-mcp": {
       "type": "http",
       "url": "${LOGMD_MCP_URL}",
       "headers": {
