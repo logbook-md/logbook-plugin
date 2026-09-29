@@ -1,6 +1,6 @@
 # logbook-plugin
 
-Claude Code plugins for [LogMD](https://github.com/logbook-md) vaults, published as a
+Claude Code plugins for [Logbook](https://github.com/logbook-md) vaults, published as a
 plugin marketplace.
 
 | Plugin | What it does |
@@ -21,7 +21,7 @@ Set them where Claude Code will see them (a shell profile, or `env` in
 
 | Variable | Value |
 | --- | --- |
-| `LOGMD_MCP_URL` | The server's MCP endpoint, e.g. `https://logmd.example.com/mcp` |
+| `LOGMD_MCP_URL` | The server's MCP endpoint, e.g. `https://logbook.example.com/mcp` |
 | `LOGMD_CF_ACCESS_CLIENT_ID` | Cloudflare Access service-token id, when the server sits behind Access |
 | `LOGMD_CF_ACCESS_CLIENT_SECRET` | Its secret |
 

@@ -1,4 +1,4 @@
-# Logbook (LogMD) — authoring engine
+# Logbook — authoring engine
 
 Shared spec for the `logbook` plugin's **document-writing** skills —
 `/logbook:guide`, `/logbook:runbook`, `/logbook:document`, `/logbook:walkthrough`.
@@ -157,7 +157,7 @@ sources:                           # one entry per `sources/` capture this docum
 - **Check the path first** with `exec` (`ls <folder>/`) before the first write.
 - **Relative markdown links** (`[nvim](../wiki/nvim.md)`) — the form that still
   resolves on GitHub, in Obsidian and on a published site. The root-absolute
-  `/folder/x.md` form is equally valid to logmd but is not used here: what breaks
+  `/folder/x.md` form is equally valid to the server but is not used here: what breaks
   is **mixing** the two, since a `./` glued onto a root-style path doubles the
   folder segment and the link dies silently. One form, everywhere.
 - **English**, whatever language the session is being conducted in — paths,

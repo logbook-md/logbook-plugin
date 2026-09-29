@@ -1,6 +1,6 @@
 ---
 name: task
-description: Capture, list and close pending work on a per-repo board (tasks/<repo>, type task-board) in the LogMD vault, with enough context to pick it up cold and a code anchor confirmed against the real code when the task is technical. Use when the user says "task", "tarea", "pendiente", "apunta esto", "queda pendiente", "/logbook:task", describes work to do later, or wants to see or close what is open.
+description: Capture, list and close pending work on a per-repo board (tasks/<repo>, type task-board) in the Logbook vault, with enough context to pick it up cold and a code anchor confirmed against the real code when the task is technical. Use when the user says "task", "tarea", "pendiente", "apunta esto", "queda pendiente", "/logbook:task", describes work to do later, or wants to see or close what is open.
 ---
 
 # logbook · task

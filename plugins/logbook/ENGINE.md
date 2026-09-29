@@ -1,4 +1,4 @@
-# Logbook (LogMD) — engine
+# Logbook — engine
 
 Shared spec for every `logbook` skill except the four self-contained ones — the synthesis
 three (`/logbook:ingest`, `/logbook:query`, `/logbook:lint`) and the authoring
@@ -57,13 +57,13 @@ Two things it defers to in turn:
   migrating a page is a decision, not a cleanup — never invent provenance for a page
   you did not generate.
 - **The `.ok/okf/*.schema.json` files** in the vault, for exact field contracts.
-  Generated; read them, never edit them. A vault the logmd server initialized
+  Generated; read them, never edit them. A vault the Logbook server initialized
   carries only `required`, `reserved-index` and `root-index`; the others exist only
   where a vault brought them along.
 
 ## Tools: use the MCP, not the filesystem
 
-The vault is remote: a logmd server, reached through the `logbook-mcp` MCP server this
+The vault is remote: a Logbook server, reached through the `logbook-mcp` MCP server this
 plugin registers. There is no local copy, so `Read`/`Grep`/`Glob` cannot reach it at
 all — and even where a vault is on disk, the native tools skip the frontmatter,
 backlinks and attribution that `exec` returns per file. The mapping:
@@ -97,7 +97,7 @@ what landed but will not render — a `mermaid-parse-error` names the line of a
 fence mermaid cannot draw. The write is not refused for it, so nothing else will
 tell you.
 
-**Write a page to be scanned, not only read.** A person reads these in the LogMD
+**Write a page to be scanned, not only read.** A person reads these in the Logbook
 app, which draws GitHub/Obsidian callouts as coloured boxes. A page longer than a
 screen opens with a `> [!SUMMARY]` callout — two to four lines with the conclusion.
 Decisions, risks and next steps sit where they occur in `> [!IMPORTANT]`,
@@ -177,7 +177,7 @@ resolves on GitHub, in Obsidian, in VS Code and on a published site, none of whi
 know where this vault's content root is.
 
 The root-absolute form (`/folder/x.md`, leading slash = content root) is equally
-valid to logmd — and the one OKF itself recommends — and handy across folders. **The rule is that the two never
+valid to the server — and the one OKF itself recommends — and handy across folders. **The rule is that the two never
 mix**: prefixing `./` to a root-style path from a document already inside that
 folder duplicates the segment (`wiki/wiki/x.md`) and the link dies silently. This
 vault picks the relative form and holds it everywhere, which is what makes that
@@ -186,7 +186,7 @@ wrong for consistency, not because the form is invalid.
 
 A page with no backlink to the raw note(s) it synthesizes is unfinished.
 
-Links are not decoration here. logmd retrieval is a **lexical loop** —
+Links are not decoration here. The server's retrieval is a **lexical loop** —
 BM25 plus recency plus graph traversal, with semantic search off — so links,
 folders, titles and folder descriptions *are* the index. Every link shortens the
 next agent's loop.
@@ -212,7 +212,7 @@ index makes pages unreachable for anyone reading the bundle without listing the
 directory. `wiki/log.md` is **newest-first**, one `## YYYY-MM-DD: <op> | <summary>`
 heading per operation.
 
-**Nothing generates them.** logmd has no index generator, so an index is only
+**Nothing generates them.** The server has no index generator, so an index is only
 as complete as the last workflow that closed its loop — which is why every
 workflow that adds a page updates the folder's `index.md` in the same run. Both are
 reserved by OKF (§3.1): they need no `type`, and an `index.md` below the vault root
