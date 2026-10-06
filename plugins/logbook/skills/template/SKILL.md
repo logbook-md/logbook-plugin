@@ -1,6 +1,6 @@
 ---
 name: template
-description: Design and write a template (a document skeleton under <folder>/.ok/templates) in the LogMD vault — a meeting note, a postmortem, an ADR, a 1:1, a PR review, any note that gets written again and again — or a folder template, a whole project laid out as several notes with stages it moves through, from spec to postmortem. Shaped by the vault's own conventions and by how that kind of document is done well, researched on the web. Use when the user says "template", "plantilla", "crea un template", "template de carpeta", "/logbook:template", or asks for a reusable shape for a kind of note or of project.
+description: Design and write a template (a document skeleton under <folder>/.ok/templates) in the Logbook vault — a meeting note, a postmortem, an ADR, a 1:1, a PR review, any note that gets written again and again — or a folder template, a whole project laid out as several notes with stages it moves through, from spec to postmortem. Shaped by the vault's own conventions and by how that kind of document is done well, researched on the web. Use when the user says "template", "plantilla", "crea un template", "template de carpeta", "/logbook:template", or asks for a reusable shape for a kind of note or of project.
 ---
 
 # logbook · template

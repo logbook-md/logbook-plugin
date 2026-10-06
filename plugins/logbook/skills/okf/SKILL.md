@@ -1,6 +1,6 @@
 ---
 name: okf
-description: The Open Knowledge Format (OKF v0.2) as the LogMD vault uses it — the conformance floor, reserved files, the frontmatter families (sources, generated, verified, status, stale_after), the actor convention, and what the server's okf diagnostics mean. Read by the other logbook skills before they write frontmatter; use directly when the user asks about OKF, frontmatter fields, provenance, trust or conformance.
+description: The Open Knowledge Format (OKF v0.2) as the Logbook vault uses it — the conformance floor, reserved files, the frontmatter families (sources, generated, verified, status, stale_after), the actor convention, and what the server's okf diagnostics mean. Read by the other logbook skills before they write frontmatter; use directly when the user asks about OKF, frontmatter fields, provenance, trust or conformance.
 ---
 
 # logbook · okf
@@ -9,7 +9,7 @@ The vault is an OKF bundle: a tree of markdown files with YAML frontmatter. OKF 
 Google's format, specified in one self-contained document, [SPEC.md at
 v0.2](https://github.com/GoogleCloudPlatform/open-knowledge-format/blob/ad30107c31c06aec8a7d5636e0d1058118604e6f/SPEC.md)
 (Apache-2.0). Section numbers below cite it. This file is the part of it the
-logbook needs, plus how the logmd server checks it; when the two disagree, the
+logbook needs, plus how the Logbook server checks it; when the two disagree, the
 spec wins, and the vault's own `wiki/CLAUDE.md` outranks both on what *this* vault
 chooses.
 
@@ -108,7 +108,7 @@ Two fields were retired in v0.2, and this vault still carries both on older page
 - **A body `# Citations` list → `sources`.** Legacy lists may stay; new documents
   put their sources in frontmatter.
 
-## What the logmd server checks
+## What the Logbook server checks
 
 | Diagnostic | Source | Meaning |
 | --- | --- | --- |
