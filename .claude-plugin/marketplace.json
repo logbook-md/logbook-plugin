@@ -10,7 +10,7 @@
       "name": "logbook",
       "source": "./plugins/logbook",
       "description": "Capture, synthesize and author a Logbook vault over its MCP server: immutable work-log notes, cross-linked wiki pages, guides, runbooks, documents, code walkthroughs, per-repo task boards, note templates, and running the jobs notes describe.",
-      "version": "0.14.0"
+      "version": "0.14.1"
     }
   ]
 }
