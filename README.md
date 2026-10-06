@@ -29,7 +29,8 @@ The two Access variables may be left unset for a server that is not behind Acces
 `LOGBOOK_MCP_URL` the server fails to connect and every skill stops and says so — none of them
 writes anywhere else.
 
-Updates arrive with `claude plugin marketplace update logbook`.
+Updates arrive with `claude plugin marketplace update logbook`. An install from before 0.14
+gets none until it follows [the move from `logmd`](#moving-from-the-logmd-marketplace).
 
 ## Moving from the `logmd` marketplace
 
