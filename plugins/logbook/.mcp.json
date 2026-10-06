@@ -2,10 +2,10 @@
   "mcpServers": {
     "logbook-mcp": {
       "type": "http",
-      "url": "${LOGMD_MCP_URL}",
+      "url": "${LOGBOOK_MCP_URL}",
       "headers": {
-        "CF-Access-Client-Id": "${LOGMD_CF_ACCESS_CLIENT_ID:-}",
-        "CF-Access-Client-Secret": "${LOGMD_CF_ACCESS_CLIENT_SECRET:-}"
+        "CF-Access-Client-Id": "${LOGBOOK_CF_ACCESS_CLIENT_ID:-}",
+        "CF-Access-Client-Secret": "${LOGBOOK_CF_ACCESS_CLIENT_SECRET:-}"
       }
     }
   }
