@@ -1,5 +1,9 @@
-# Static checks only: the manifests parse, their versions agree, and the hook is
-# valid shell. Nothing here talks to a vault.
+# Static checks only: the manifests parse, their versions agree, the skills carry
+# their frontmatter, and the hook is valid shell that fires on exactly the commands
+# its fixtures say. Nothing here talks to a vault.
+#
+# Each loop fails on its own command, never `a && b`: under `bash -e` a failure on
+# the left of `&&` is ignored, so only the last file's result would count.
 name: lint
 
 on:
@@ -17,7 +21,8 @@ jobs:
         run: |
           for f in .claude-plugin/marketplace.json plugins/*/.claude-plugin/plugin.json \
                    plugins/*/.mcp.json plugins/*/hooks/hooks.json; do
-            jq empty "$f" && echo "ok  $f"
+            jq empty "$f" || { echo "invalid JSON: $f"; exit 1; }
+            echo "ok  $f"
           done
 
       # The marketplace entry is what `claude plugin` compares to decide an update is
@@ -34,6 +39,14 @@ jobs:
 
       - name: shellcheck + bash -n
         run: |
-          for f in plugins/*/hooks/*.sh; do
-            bash -n "$f" && shellcheck "$f" && echo "ok  $f"
+          for f in plugins/*/hooks/*.sh tests/*.sh; do
+            bash -n "$f" || exit 1
+            shellcheck "$f" || exit 1
+            echo "ok  $f"
           done
+
+      - name: skill frontmatter
+        run: bash tests/skills.sh
+
+      - name: hook fixtures
+        run: bash tests/hook.sh
