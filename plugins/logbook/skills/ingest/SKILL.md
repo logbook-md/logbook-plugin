@@ -35,9 +35,10 @@ Synthesize the `entries/` notes not yet processed:
    source, or provenance to fill a field.
 6. **Cross-link.** Each page links the neighbours it mentions and the specific
    source note(s) it synthesizes (`[YYYY-MM-DD-HHMM-<repo>](../entries/….md)`).
-   External sources go under `# Citations`, and anything fetched from the live web
-   gets captured in `sources/` first — pages cite local documents, not URLs that
-   rot. Relative links, the one form used everywhere (see `ENGINE.md`).
+   External sources are cited in the `sources` frontmatter, never a body
+   `# Citations` list (legacy since OKF v0.2 — see `/logbook:okf`), and anything
+   fetched from the live web gets captured in `sources/` first — pages cite local
+   documents, not URLs that rot. Relative links, the one form used everywhere (see `ENGINE.md`).
 7. **Preserve the repo tag** from the bitácora on the service page and mirror it
    into frontmatter `tags`, so raw and wiki cross-reference.
 8. **Close the loop.** Update `wiki/index.md` with any new page, reusing its

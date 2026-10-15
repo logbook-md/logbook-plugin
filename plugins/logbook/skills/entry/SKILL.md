@@ -1,12 +1,12 @@
 ---
 name: entry
-description: Write one immutable per-invocation work-log note (entries/YYYY-MM-DD-HHMM-<repo>) into the Logbook vault, recording what changed and why, tagged by repo so a day spanning many agents and services can be read, cross-referenced, and later synthesized by /logbook:ingest. Use when the user says "logbook", "bitácora", "guarda resumen", "resumen del día", or after landing a git commit / opening a PR.
+description: Write one immutable per-invocation work-log note (entries/YYYY-MM-DD-HHMM-<repo>) into the Logbook vault, recording what changed and why, tagged by repo so a day spanning many agents and services can be read, cross-referenced, and later synthesized by /logbook:ingest. Use when the user says "logbook entry", "log this", "bitácora", "guarda resumen", "resumen del día", "/logbook:entry", or after landing a git commit / opening a PR.
 ---
 
 # logbook · entry
 
-Deliberately **self-contained**: unlike its three siblings this skill does not
-read the plugin root's `ENGINE.md` first. It fires after every commit, and
+Deliberately **self-contained**: unlike the synthesis and authoring skills, this
+one does not read the plugin root's `ENGINE.md` first. It fires after every commit, and
 capture is write-only — everything it needs is below. Read the engine only when
 something here is ambiguous.
 
@@ -31,8 +31,10 @@ it. Keep it to the *reasoning* git won't preserve, not a commit-log dump.
   work**, not per WIP commit. (A `PostToolUse` hook fires on every commit and
   reminds you; the judgment of whether *this* commit is a unit of work is still
   yours. Say so and skip when it isn't.)
-- Whenever the user says "logbook" / "bitácora" / "guarda resumen" / "resumen del
-  día", or invokes `/logbook:entry`.
+- Whenever the user says "logbook entry" / "log this" / "bitácora" / "guarda
+  resumen" / "resumen del día", or invokes `/logbook:entry`. The bare word
+  "logbook" is not a trigger: it is the product's name, and a session about the
+  app or this plugin says it constantly.
 
 ## Where
 
@@ -60,7 +62,7 @@ Follows the vault's `entry-note` template. Frontmatter plus the four
 sections — pass `content` and `frontmatter` to `write` in one call:
 
 ```yaml
-type: log-entry           # required by OKF; what the 170+ existing notes use (not `log`)
+type: log-entry           # required by OKF; what the existing notes use (not `log`)
 date: 2026-09-02          # ISO 8601
 repo: dotfiles            # the repository slug, bare
 title: …                  # the note's headline — this is the document's H1
@@ -86,7 +88,7 @@ which is MD032 on every bullet. Table separator rows are spaced too:
 immutable, so a warning written here is permanent; there is no fix pass later.
 
 **The body has no `#` heading** — `title:` is the H1, and a second one is an MD025
-violation on every note. Sections start at `##`. (The ~196 notes before 2026-09-06
+violation on every note. Sections start at `##`. (The notes from before 2026-09-06
 carry no `title:` and open with a `# YYYY-MM-DD HH:MM — <repo>` line instead; four
 notes from that day carry both and are the vault's only standing lint warnings.
 They are raw and immutable — read them, never "fix" them.)
@@ -106,7 +108,7 @@ Those older notes also carry the Spanish headings (`Qué cambió` / `Por qué` /
 
 **Write the note in English**, whatever language the session is being conducted
 in — same rule as the repo, and since 2026-09-06 the vault's too, paths and prose
-alike. The 199 older notes are Spanish and stay that way: raw is immutable, so
+alike. The older notes are Spanish and stay that way: raw is immutable, so
 never "fix" one.
 
 ## What this skill does NOT do

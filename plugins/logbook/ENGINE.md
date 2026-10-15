@@ -1,17 +1,20 @@
 # Logbook — engine
 
-Shared spec for every `logbook` skill except the four self-contained ones — the synthesis
-three (`/logbook:ingest`, `/logbook:query`, `/logbook:lint`) and the authoring
-four (`/logbook:guide`, `/logbook:runbook`, `/logbook:document`,
-`/logbook:walkthrough`). **Each of those reads this file first**, then runs its
-workflow. Everything common — where the contract lives, which tools to use, the
-layers, the watermark — is here once; the skills hold only their own steps. The
-other four are self-contained on purpose, because reading three spec files
-first is a cost none of them would earn back: `/logbook:entry` (the capture gate,
-fired from a commit hook), `/logbook:task` (the pending-work board),
-`/logbook:run` (executes the job a note describes, recording the outcome in that
-note) and `/logbook:template` (designs a reusable note shape). None reads this
-file.
+Shared spec for the `logbook` skills. Who reads it:
+
+- **Seven read this file first**, then run their workflow: the synthesis three
+  (`/logbook:ingest`, `/logbook:query`, `/logbook:lint`) and the authoring four
+  (`/logbook:guide`, `/logbook:runbook`, `/logbook:document`,
+  `/logbook:walkthrough`). Everything common — where the contract lives, which
+  tools to use, the layers, the watermark — is here once; the skills hold only
+  their own steps.
+- **Four are self-contained and never read it**, because reading spec files
+  first is a cost none of them would earn back: `/logbook:entry` (the capture
+  gate, fired from a commit hook), `/logbook:task` (the pending-work board),
+  `/logbook:run` (executes the job a note describes, recording the outcome in
+  that note) and `/logbook:template` (designs a reusable note shape).
+- **`/logbook:okf`** is reference, not a workflow: the OKF rules the others
+  write to (see below).
 
 `/logbook:entry` captures work as immutable per-invocation notes, but capture is
 write-only: notes pile up, they never come back synthesized. The synthesis three
