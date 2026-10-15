@@ -80,8 +80,10 @@ on this process is extended and linked, not duplicated.
 
 ### 3. Trace it, with the graph and then against it
 
-**The structural tools first** (`codebase-memory-mcp`; `index_repository` if the
-project is not indexed):
+**The structural tools first** (`codebase-memory-mcp`, if available;
+`index_repository` if the project is not indexed). Without it, build the same
+chain with `Grep` / `Read` from the entrypoint, and say in *Where the trace goes
+blind* that no call graph was used:
 
 | Need | Call |
 |---|---|
@@ -200,8 +202,9 @@ Body shape:
 
    plus the note that a non-empty diff means the anchors need re-checking, not
    that the document is necessarily wrong.
-9. **`# Citations`** — the `wiki/` page holding the why, the runbook that operates
-   it, any `sources/` capture used.
+9. **`## Related`** — the `wiki/` page holding the why and the runbook that
+   operates it, as relative links. Any `sources/` capture used goes in the
+   `sources` frontmatter (AUTHORING.md), not in the body.
 
 ### 7. Close the loop
 

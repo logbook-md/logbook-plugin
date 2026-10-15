@@ -59,11 +59,12 @@ there, create it before the first document:
    - **The vault** — `/logbook:query`'s workflow. What is already known, and what
      the vault explicitly does *not* know (state that in the document).
    - **The code and the machine** — read the real files; `codebase-memory-mcp`
-     (`search_graph`, `trace_path`, `get_code_snippet`) for call chains, who calls
-     what, dead code and impact; `Grep`/`Read` for text and config; the binary
+     if available (`search_graph`, `trace_path`, `get_code_snippet`) for call
+     chains, who calls what, dead code and impact — otherwise `Grep`/`Read`; `Grep`/`Read` for text and config; the binary
      itself (`--help`, `--version`, `api-json`) for its own surface; a measurement
      for any performance or size claim.
-   - **`context7`** for a third-party library's current API.
+   - **`context7`**, if available, for a third-party library's current API;
+     otherwise `Grep`/`Read` the installed library itself.
    - **The live web**, only through the vault's external-research procedure:
      scan, agree a rubric with the user and **stop until they confirm**, capture
      each source into `sources/` as you fetch it, cite the local capture. If a
@@ -87,7 +88,8 @@ there, create it before the first document:
      reconstruct from the code.
    - **Failure modes** — especially everything that fails *silently*.
    - **Open questions / unverified** — explicit, not omitted.
-   - **`# Citations`** — the `sources/` captures and the vault pages used.
+   - **`## Related`** — the vault pages used, as relative links. The `sources/`
+     captures go in the `sources` frontmatter (AUTHORING.md), not in the body.
 
    Write each section when its evidence is finished, not in a final pass.
 

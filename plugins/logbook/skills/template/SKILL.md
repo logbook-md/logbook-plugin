@@ -27,7 +27,7 @@ folder moves through. Section 4b says how to design one.
 
 ## 1. Pin down the kind of note
 
-Four things, taken from the request and asked for only when they cannot be:
+Five things, taken from the request and asked for only when they cannot be:
 
 - **The kind** — "postmortem", "weekly 1:1", "PR review". If it is vague ("a template
   for work"), ask one question that names two or three concrete kinds to pick from.

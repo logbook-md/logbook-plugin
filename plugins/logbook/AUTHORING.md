@@ -8,9 +8,11 @@ the watermark), then the vault's own `wiki/CLAUDE.md` (which outranks both), the
 document — where the evidence comes from, how it is checked, the skeleton, the
 closing loop — is here once.
 
-The other three skills are a different job and do not read this file:
-`/logbook:entry` captures raw, `/logbook:ingest` synthesizes raw into `wiki/`,
-`/logbook:lint` audits. These four **author** a document that did not exist as a
+No other skill reads this file; they do a different job. `/logbook:entry`
+captures raw; `/logbook:ingest`, `/logbook:query` and `/logbook:lint` synthesize
+and audit `wiki/`; `/logbook:task` keeps the board, `/logbook:run` does the job a
+note describes, `/logbook:template` designs note shapes, and `/logbook:okf` is the
+format reference. The four here **author** a document that did not exist as a
 document anywhere — from the code, from the vault, and (gated) from the web.
 
 `/logbook:walkthrough` is the strictest of the four and worth reading as this
@@ -65,7 +67,7 @@ The authority on a tool is the tool:
 | A flag, a subcommand, a config key | `<tool> --help`, `<tool> api-json`, `ghostty +show-config`, `+list-keybinds`, `brew info` |
 | A version | `<tool> --version` — never a changelog, never a lockfile you did not open |
 | What a script does, and in what order | Read the script. Top to bottom. The README is a claim, the script is the fact |
-| Structure: who calls what, dead code, call chains | `codebase-memory-mcp` (`search_graph`, `trace_path`, `get_code_snippet`); `index_repository` first if the project is not indexed |
+| Structure: who calls what, dead code, call chains | `codebase-memory-mcp` if available (`search_graph`, `trace_path`, `get_code_snippet`; `index_repository` first if the project is not indexed); otherwise `Grep` / `Read`, following the calls by hand |
 | Literal text, configs, non-code files | `Grep` / `Glob` / `Read` |
 | A performance or size number | Measure it here. A README's benchmark describes someone else's machine |
 | A command's real output shape | Run it, and paste what it actually printed |
@@ -75,10 +77,11 @@ itself worth a line in the document.
 
 ### 3. A library's current API
 
-`context7` — for a third-party library's signatures and current usage, which is
-exactly where a training cutoff betrays you. Not a general search engine: for a
-mature language's stable core, or for anything that is not a library, it is only
-a round-trip.
+`context7`, if available — for a third-party library's signatures and current
+usage, which is exactly where a training cutoff betrays you. Not a general search
+engine: for a mature language's stable core, or for anything that is not a
+library, it is only a round-trip. Without it, `Grep` / `Read` the installed
+library itself (its source, type definitions or bundled docs) — never recall.
 
 ### 4. The live web — gated
 

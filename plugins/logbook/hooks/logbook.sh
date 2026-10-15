@@ -18,16 +18,26 @@
 
 set -uo pipefail
 
-command -v jq >/dev/null 2>&1 || exit 0
-
 INPUT="$(cat)"
 
-TOOL="$(jq -r '.tool_name // ""' <<<"$INPUT" 2>/dev/null)" || exit 0
-CMD="$(jq -r '.tool_input.command // ""' <<<"$INPUT" 2>/dev/null)" || exit 0
+# This runs after EVERY shell command, so the common case has to be cheap: a
+# payload that does not even contain the word cannot hold a `git commit`, and it
+# leaves before any process is spawned. Only what passes pays for jq, once.
+[[ "$INPUT" == *commit* ]] || exit 0
 
-# Both tool names on purpose: settings.json sets CLAUDE_CODE_USE_POWERSHELL_TOOL
-# on Windows, and a session that inherits that env var elsewhere routes commits
-# through PowerShell instead of Bash. Matching only "Bash" would go quietly dead.
+command -v jq >/dev/null 2>&1 || exit 0
+
+# One parse for both fields: the tool name on the first line, the command (which
+# may span lines) after it.
+PARSED="$(jq -r '(.tool_name // "") + "\n" + (.tool_input.command // "")' <<<"$INPUT" 2>/dev/null)" || exit 0
+nl=$'\n'
+TOOL="${PARSED%%"$nl"*}"
+CMD=""
+[[ "$PARSED" == *"$nl"* ]] && CMD="${PARSED#*"$nl"}"
+
+# Both tool names on purpose: a session with CLAUDE_CODE_USE_POWERSHELL_TOOL set
+# runs its shell commands through the PowerShell tool instead of Bash, so matching
+# only "Bash" would go quietly dead there.
 case "$TOOL" in
   Bash | PowerShell) ;;
   *) exit 0 ;;
@@ -45,8 +55,17 @@ esac
 commit_re="git([[:space:]]+(-[cC][[:space:]]+([^[:space:]\"']|\"[^\"]*\"|'[^']*')+|--[[:alnum:]_-]+(=[^[:space:]]+)?))*[[:space:]]+commit([^[:alnum:]_-]|\$)"
 [[ "$CMD" =~ $commit_re ]] || exit 0
 
-# --dry-run writes nothing, so there is nothing to log about it.
-[[ "$CMD" == *"--dry-run"* ]] && exit 0
+# `git commit --dry-run` writes nothing, so there is nothing to log about it. Only
+# the commit's own arguments count — the text after `commit`, up to the next
+# `;`, `&`, `|` or newline — so a `git push --dry-run` elsewhere in the chain
+# does not silence a real commit.
+commit_head="${BASH_REMATCH[0]%commit*}commit"
+commit_args="${CMD#*"$commit_head"}"
+seps=$'[;&|\n]'
+# Unquoted on purpose: $seps is a bracket pattern, not a literal.
+# shellcheck disable=SC2295
+commit_args="${commit_args%%$seps*}"
+[[ "$commit_args" == *"--dry-run"* ]] && exit 0
 
 # PostToolUse only fires on a tool call that SUCCEEDED (a failure routes to
 # PostToolUseFailure), so exit status is already handled. This catches the one

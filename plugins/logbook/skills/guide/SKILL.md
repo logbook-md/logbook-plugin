@@ -38,8 +38,10 @@ in the body. `guides/index.md` is hand-written and lists every file in the folde
      `ghostty +show-config`, `brew info`. A tool is the only authority on itself
    - what is installed and at which version → `--version`, not a lockfile you
      did not open
-   - structure and call chains → `codebase-memory-mcp`
-   - a library's current signatures → `context7`
+   - structure and call chains → `codebase-memory-mcp` if available;
+     otherwise `Grep` / `Read`
+   - a library's current signatures → `context7` if available; otherwise
+     `Grep` / `Read` the installed library
    - anything the vault already established → `/logbook:query`'s workflow
 
    **A partial enumeration presented as complete is a defect.** If a set is too
