@@ -76,8 +76,11 @@ backlinks and attribution that `exec` returns per file. The mapping:
 | List, `cat`, `grep`, `find` over the vault | `exec` (read-only allowlist, one pipe per call) |
 | Ranked lookup by title/body | `search` (`query`; lexical BM25 + recency, no semantic signal) |
 | Create a document | `write` (`document`, or `documents` for a batch) |
-| Change part of one | `edit` (`find`/`replace`, or a `frontmatter` merge-patch) |
-| A folder's title, description and tags | `folder` (`frontmatter` merge-patch; creates the folder) |
+| Change part of one | `edit` (`find`/`replace`, a `frontmatter` merge-patch, or both; several at once as `edits`) |
+| Rename a frontmatter key, or repair YAML that no longer parses | `edit` with `raw: true` (find/replace over the whole file) |
+| See an edit before making it | `edit` with `dry_run: true` (the diff; nothing written) |
+| The same change across many notes | `bulk_edit` (`glob` or `documents`, `where`, `frontmatter` and/or `find`/`replace`; `dry_run` first) |
+| A folder's title, description, tags and stage | `folder` (`frontmatter` merge-patch; creates the folder) |
 | Backlinks, forward links, dead, orphans, hubs, suggest | `links` (one `kind`, or an array) |
 | Broken links + lint violations in one pass | `audit` |
 | Lint one doc, optionally auto-fix | `lint` (`fix: true` with `document`) |
@@ -94,6 +97,12 @@ bytes it replaced. To change an existing page use `edit`; to add to one, `write`
 with an explicit `append`/`prepend`, or `edit` against a unique anchor.
 `frontmatter` passed to `write` is merged into what the page already has, never a
 replacement for it.
+
+**A frontmatter patch rewrites only the keys it changes.** Every other line keeps its
+quotes, comments and indentation, and nothing is saved whose frontmatter would not read
+back as written — the server refuses it instead. When another agent may be editing the
+same note, pass the `version` you read it at as `expect_version`: the edit is refused if
+the note changed since. A dry run's answer carries that `version` for you.
 
 **Read the response, not just its `ok`.** `write` and `edit` return `warnings` for
 what landed but will not render — a `mermaid-parse-error` names the line of a
