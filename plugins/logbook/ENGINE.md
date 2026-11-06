@@ -134,7 +134,10 @@ nothing in the page itself.
 **Paths under `.ok/` are not documents.** `write` and `edit` refuse them: a
 folder's own frontmatter goes through `folder`, a template through
 `template_write` — a folder template too, with `files` and `stages` — and a new
-folder is made from a folder template with `folder_from_template`.
+folder is made from a folder template with `folder_from_template`. An existing
+template is changed piece by piece with `template_edit` (its title, tags, stages,
+find/replace over its text, one file of a folder template, a new name) and removed
+with `template_delete`, both from the folder that defines it.
 
 ## Note names: `.mdx` by default
 
