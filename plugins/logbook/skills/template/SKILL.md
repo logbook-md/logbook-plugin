@@ -1,6 +1,6 @@
 ---
 name: template
-description: Design and write a template (a document skeleton under <folder>/.ok/templates) in the Logbook vault — a meeting note, a postmortem, an ADR, a 1:1, a PR review, any note that gets written again and again — or a folder template, a whole project laid out as several notes with stages it moves through, from spec to postmortem. Shaped by the vault's own conventions and by how that kind of document is done well, researched on the web. Use when the user says "template", "plantilla", "crea un template", "template de carpeta", "/logbook:template", or asks for a reusable shape for a kind of note or of project.
+description: Design and write a template (a document skeleton under <folder>/.ok/templates) in the Logbook vault — a meeting note, a postmortem, an ADR, a 1:1, a PR review, any note that gets written again and again — or a folder template, a whole project laid out as several notes with stages it moves through, from spec to postmortem. Shaped by the vault's own conventions and by how that kind of document is done well, researched on the web. Use when the user says "template", "plantilla", "crea un template", "template de carpeta", "/logbook:template", or asks for a reusable shape for a kind of note or of project — or to change, rename or delete a template that exists ("edita el template", "elimina la plantilla").
 ---
 
 # logbook · template
@@ -17,8 +17,9 @@ or a form so long people delete half of it before writing.
 
 It lives at `<folder>/.ok/templates/<name>.mdx` (older ones at `<name>.md`, still read,
 and rewritten where they are) and applies to that folder and every
-folder under it. **It is written with `template_write`, never `write`** — `write`
-refuses paths under `.ok/`.
+folder under it. **It is written with `template_write`, changed with
+`template_edit` and removed with `template_delete`, never `write`, `edit` or
+`delete`** — those refuse paths under `.ok/` and would mangle the placeholders.
 
 A **folder template** is the same decision made for work that is more than one note
 — a project that starts as a spec, grows a design and a development log, ships,
@@ -49,8 +50,9 @@ Five things, taken from the request and asked for only when they cannot be:
 
 - **`templates` with the folder.** It lists what already applies there, inherited
   ones included. If one covers this kind, **improve that one** (call `templates`
-  with its `name` to read its `content`, then write it back under the same name)
-  instead of adding a near-twin that splits every future note in two.
+  with its `name` to read its `content`, then change it with `template_edit`, or
+  write it back whole under the same name) instead of adding a near-twin that
+  splits every future note in two.
 - **The vault's own instructions.** `find . -maxdepth 2 -iname CLAUDE.md` and
   `-iname AGENTS.md`, and read them. On frontmatter keys, `type` values, tags,
   naming and language they outrank everything below.
@@ -172,6 +174,30 @@ its content the whole note, frontmatter included. `files` is the whole template:
 writing it again drops any file left out. Then each later-stage note template,
 with `when`.
 
+## 5b. Change, rename or delete one
+
+When the user asks to change a template that exists, change that one — section 2's
+look still applies, and so does section 4 on what a good one holds.
+
+- **Find where it is defined.** `templates` with the folder and its `name`: `source`
+  is the file, and its folder is the one to pass. An inherited template (`origin:
+  inherited`) is changed or deleted in the folder that defines it, for every folder
+  that inherits it — say so before doing it. The tools refuse it from below and name
+  that folder.
+- **`template_edit` changes only what it is given**: `title`, `description`, `tags`,
+  `when` (a note template) or `stages` (a folder template) — an empty string or list
+  removes one — and `edits`, find/replace steps over the text `content` shows,
+  without the `template:` block. A step's `find` must occur once, unless it has
+  `occurrence` or `all`. On a folder template, `edits` run over the one `file` it
+  names, and `files` adds or replaces a file whole (`null` removes it) without
+  restating the rest. `rename` gives it a new name, keeping its extension.
+  `dry_run: true` returns the `diff` and writes nothing — use it when the change is
+  more than a line, and show it. Rewriting most of it is `template_write` again.
+- **`template_delete`** with `name` and `folder` removes a note template's file, or a
+  folder template's whole directory. Notes and folders already made from it keep
+  what they are. Removing one is the user's call: delete only what they named, and
+  when another template covers the same kind, say which.
+
 ## 6. Check what it makes
 
 Call `templates` with the folder and the `name`. The response's `rendered` is the
@@ -197,7 +223,8 @@ the later-stage templates list the `when` you meant.
 
 - **It does not create notes or folders from the template.** The app does that,
   or the agent when a note or a project is asked for (`folder_from_template`).
-- **It does not write to `.ok/` with anything but `template_write`**, and does not
-  touch the folder's own frontmatter.
-- **It does not delete templates.** Replacing one is writing it again under the
-  same name; removing one is the user's call.
+- **It does not write to `.ok/` with anything but `template_write`,
+  `template_edit` and `template_delete`**, and does not touch the folder's own
+  frontmatter.
+- **It does not delete a template the user did not name.** Replacing one is
+  editing it or writing it again under the same name; removing one is their call.
