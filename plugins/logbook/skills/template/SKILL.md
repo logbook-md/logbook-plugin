@@ -15,7 +15,8 @@ one is short enough to be filled every time and complete enough that the note it
 makes is still useful a year later. A bad one is either a blank page with headings
 or a form so long people delete half of it before writing.
 
-It lives at `<folder>/.ok/templates/<name>.md` and applies to that folder and every
+It lives at `<folder>/.ok/templates/<name>.mdx` (older ones at `<name>.md`, still read,
+and rewritten where they are) and applies to that folder and every
 folder under it. **It is written with `template_write`, never `write`** — `write`
 refuses paths under `.ok/`.
 
@@ -131,14 +132,16 @@ notebook's menu, or an agent with `folder` and `frontmatter: {stage}`.
 **Files — only what day one needs.** A file created empty on day one and filled
 months later is a file people delete or forget. Lay out:
 
-- **An entry note** (`README.md` or `index.md`): what the project is, and a
+- **An entry note** (`README.mdx` or `index.md`): what the project is, and a
   section linking the notes as they appear. It is what opens when the folder is
   made.
 - **The notes the first stage writes** — the spec itself.
 - **Logs that accumulate from the start**, in a subfolder when they are one note
   per day or per decision (`log/`, `decisions/`).
 
-Every file follows section 4: frontmatter with `type`, empty fields, one italic
+Key the files `.mdx` (`README.mdx`, `spec.mdx`, `log/2026-01-01.mdx`); a `.md` key is
+made as `.mdx` all the same, with the links between the files following, and only
+`index.md` and `log.md` stay `.md`. Every file follows section 4: frontmatter with `type`, empty fields, one italic
 prompt per heading. Inside a folder template **`{{name}}`** is also accepted — the
 new folder's name — so the notes can say which project they belong to
 (`project: {{name}}`).

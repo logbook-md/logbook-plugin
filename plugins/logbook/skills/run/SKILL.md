@@ -20,13 +20,14 @@ it back into the note. The note is both the order and the record.
 /logbook:run <note> [anything the note leaves open]
 ```
 
-`<note>` is a vault path (`reviews/pr-142`, with or without `.md`), a title, or a
+`<note>` is a vault path (`reviews/pr-142`, with or without its `.md`/`.mdx`), a title, or a
 few words of one. Whatever follows it fills the note's open parameters — a PR
 number, a branch — or narrows the job.
 
 ## 1. Find the note
 
-- A path: `exec` → `ls <path>.md`. It exists or it does not.
+- A path: `exec` → `ls <path>`, bare — it answers with the real file, `.md` or `.mdx`.
+  It exists or it does not.
 - Anything else: `search` with `intent: omnibar` (titles). One clear hit, use it.
   Several, list them with their `description` and ask. None, retry with the
   default full-text intent, then ask.
@@ -37,7 +38,7 @@ number, a branch — or narrows the job.
 
 ## 2. Read it whole
 
-`exec` → `cat <path>.md` — the enrichment carries the frontmatter and the
+`exec` → `cat <path>` — the enrichment carries the frontmatter and the
 backlinks. Sort what is in it into three kinds:
 
 | Kind | Where it is | What it is for |

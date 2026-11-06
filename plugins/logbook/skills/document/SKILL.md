@@ -30,7 +30,7 @@ misuse this skill:
 **Say which one you picked and why, before writing.** If it is not a document,
 hand it to the right skill instead of forcing it into `docs/`.
 
-Target: **`docs/<topic>.md`**, `type: document`, kebab-case slug, no `#` heading
+Target: **`docs/<topic>.mdx`** (written bare as `docs/<topic>`; an existing `.md` keeps its extension), `type: document`, kebab-case slug, no `#` heading
 in the body.
 
 ### Bootstrapping `docs/`
@@ -42,7 +42,7 @@ there, create it before the first document:
   `description` and `tags` — the folder description is part of the retrieval
   index, not decoration.
 - `docs/index.md` — hand-written, no frontmatter, `## <Category>` headings and
-  `- [doc](./doc.md) — <the doc's description>` entries. Nothing generates it, so
+  `- [doc](./doc.mdx) — <the doc's description>` entries. Nothing generates it, so
   it is only complete if every document adds itself.
 
 ## Workflow

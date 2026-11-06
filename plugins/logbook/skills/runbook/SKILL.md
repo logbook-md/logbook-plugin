@@ -17,7 +17,7 @@ how to undo it. It is not a reference table — that is `/logbook:guide`. **The
 *why* does not go here**; it goes on the repo's `wiki/` page, and the runbook
 links it. An operator halfway through a migration does not want the rationale.
 
-Target: **`runbooks/<repo>-<topic>.md`**, `type: runbook` — the file name leads
+Target: **`runbooks/<repo>-<topic>.mdx`** (written bare; an existing `.md` keeps its extension), `type: runbook` — the file name leads
 with the repo slug (`dotfiles-macos`, `dotfiles-preflight`), kebab-case, no `#`
 heading in the body. `runbooks/index.md` is hand-written and lists every file.
 

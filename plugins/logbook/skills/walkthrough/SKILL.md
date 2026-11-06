@@ -19,7 +19,7 @@ up with diagrams. Its siblings each hold a different half and the walkthrough
 *how do I run it* is a `runbook`, the *what are the flags* is a `guide`, the
 *argued treatment* is a `document`.
 
-Target: **`flows/<repo>-<process>.md`**, `type: flow`, kebab-case, no `#`
+Target: **`flows/<repo>-<process>.mdx`** (written bare; an existing `.md` keeps its extension), `type: flow`, kebab-case, no `#`
 heading in the body.
 
 ## What makes this skill different: it is re-verifiable
@@ -48,7 +48,7 @@ first document:
   `description` and `tags`. The folder description is part of the retrieval
   index, not decoration.
 - `flows/index.md` — hand-written, no frontmatter, `## <Category>` headings,
-  `- [flow](./flow.md) — <its description>` entries. Nothing generates it, so it
+  `- [flow](./flow.mdx) — <its description>` entries. Nothing generates it, so it
   is only complete if every flow adds itself.
 
 ## Workflow

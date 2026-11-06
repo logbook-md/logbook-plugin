@@ -136,6 +136,28 @@ folder's own frontmatter goes through `folder`, a template through
 `template_write` — a folder template too, with `files` and `stages` — and a new
 folder is made from a folder template with `folder_from_template`.
 
+## Note names: `.mdx` by default
+
+Every **new** note is `.mdx`, so it can use the components the app draws (`<Summary>`,
+`<Steps>`, `<Task>`, `<NoteList>` — `components` lists them), and `> [!TYPE]` callouts
+keep working in it. Existing `.md` notes stay exactly as they are: never rename,
+convert or rewrite one to change its extension.
+
+- **Name notes without an extension** in `write`, `edit`, `move`, `exec` and the rest.
+  The server takes a bare name as the `.md` or `.mdx` already there, and as a new `.mdx`
+  when neither is (the vault's `documents.defaultExtension`). So appending to an old
+  note never starts a twin beside it. An extension written out always wins — writing
+  `x.md` makes a new `.md`, which is the one thing not to do for a new note.
+- **`index.md` and `log.md` stay `.md`**, bare or not: OKF reserves them by that name.
+- **A name both files answer to is refused**, naming the two: name the one you mean
+  with its extension. Do not create the second one.
+- **Check a path with its bare name**: `exec` `ls <folder>/<name>` answers the real
+  file (`…/<name>.mdx`); `ls <name>.md` when only the `.mdx` exists fails, and says so.
+- **Templates are `.mdx` too.** `template_write` keeps a new one as
+  `.ok/templates/<name>.mdx` and rewrites an old `.md` one where it is;
+  `folder_from_template` makes a template's `README.md`/`spec.md` as `.mdx` and
+  rewrites the links between them.
+
 `exec` is read-only and is **not a shell**: one command or one pipe, no `&&`, no
 `;`, no redirection, and no backtick, `$(` or `${` anywhere — not even inside
 quotes. Several things = several calls.
@@ -183,8 +205,10 @@ it may write to.
 
 ## Links
 
-Standard markdown links in the **relative** form — `[service-x](./service-x.md)`,
-`[note](../entries/….md)`. The reason is portability: a relative link still
+Standard markdown links in the **relative** form — `[service-x](./service-x.mdx)`,
+`[note](../entries/….mdx)`, written with the extension the target really has (`.md`
+for an old note). A `.md` link to a note that is now `.mdx` still resolves, so old
+links are not dead and are not worth a rewrite. The reason is portability: a relative link still
 resolves on GitHub, in Obsidian, in VS Code and on a published site, none of which
 know where this vault's content root is.
 

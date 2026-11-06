@@ -18,7 +18,7 @@ day. It is not a procedure with an order and a verification — that is
 is the `wiki/` page, and the guide **links to it** rather than repeating it. It
 is not a design document or an analysis — that is `/logbook:document`.
 
-Target: **`guides/<topic>.md`**, `type: guide`, kebab-case slug, no `#` heading
+Target: **`guides/<topic>.mdx`** (written bare as `guides/<topic>`; an existing `.md` keeps its extension), `type: guide`, kebab-case slug, no `#` heading
 in the body. `guides/index.md` is hand-written and lists every file in the folder.
 
 ## Workflow

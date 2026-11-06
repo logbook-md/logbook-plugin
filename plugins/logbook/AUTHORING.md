@@ -157,7 +157,9 @@ sources:                           # one entry per `sources/` capture this docum
   is how this vault lost its `log.md` once. The server refuses content at a live
   path without an explicit `position`, so the only way to get there is to ask for
   it by name; don't.
-- **Check the path first** with `exec` (`ls <folder>/`) before the first write.
+- **Check the path first** with `exec` (`ls <folder>/`) before the first write, and
+  write a new page bare (`<folder>/<slug>`): the server makes it `.mdx` (ENGINE.md,
+  *Note names*).
 - **Relative markdown links** (`[nvim](../wiki/nvim.md)`) — the form that still
   resolves on GitHub, in Obsidian and on a published site. The root-absolute
   `/folder/x.md` form is equally valid to the server but is not used here: what breaks
