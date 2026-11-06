@@ -26,7 +26,8 @@ Three operations, one verb:
 
 ## Where
 
-**`tasks/<repo>.md`** — one board per repository, `type: task-board`, written
+**`tasks/<repo>`** — one board per repository (a new board is `.mdx`; one already
+`.md` stays `.md` — name it bare and the server finds it), `type: task-board`, written
 through the `logbook-mcp` MCP. `<repo>` is the repository slug, bare, the same
 one `/logbook:entry` uses.
 
@@ -102,7 +103,7 @@ closed.
 
 `exec` and read — this is a plain read, keep it cheap:
 
-- One repo: `cat tasks/<repo>.md`.
+- One repo: `cat tasks/<repo>`.
 - Everything open, across repos: `grep -n "^- \[ \]" tasks/`.
 - Report **open first**, grouped by repo, oldest first — age is the signal. Say
   out loud which ones carry a stale-looking anchor (an old SHA on a file that has

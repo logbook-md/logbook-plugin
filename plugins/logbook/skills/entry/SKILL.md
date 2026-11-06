@@ -44,7 +44,8 @@ Logbook vault, written with the `logbook-mcp` MCP's `write` tool
 not the product's and not the org's; the vault's `wiki/CLAUDE.md` keeps the alias
 table, and a raw note is never re-tagged after the fact.
 
-- The path carries **no extension**: `write` appends `.md` itself.
+- The path carries **no extension**: `write` makes it `.mdx` itself (and keeps the
+  `.md` or `.mdx` already there, so a bare name never starts a twin).
 - Date and time are in your context — don't guess them. `HHMM` (no colon — it's a
   filename), so the name sorts chronologically.
 - **Check the path first** with `exec` (`ls entries/ | grep <YYYY-MM-DD-HHMM>`).

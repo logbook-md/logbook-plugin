@@ -34,7 +34,7 @@ Synthesize the `entries/` notes not yet processed:
    and bump the page's timestamp on every update. Do not invent a `resource`, a
    source, or provenance to fill a field.
 6. **Cross-link.** Each page links the neighbours it mentions and the specific
-   source note(s) it synthesizes (`[YYYY-MM-DD-HHMM-<repo>](../entries/….md)`).
+   source note(s) it synthesizes (`[YYYY-MM-DD-HHMM-<repo>](../entries/….mdx)`, or `.md` for an entry from before `.mdx`).
    External sources are cited in the `sources` frontmatter, never a body
    `# Citations` list (legacy since OKF v0.2 — see `/logbook:okf`), and anything
    fetched from the live web gets captured in `sources/` first — pages cite local
