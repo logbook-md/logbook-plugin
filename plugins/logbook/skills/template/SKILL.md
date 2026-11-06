@@ -90,8 +90,11 @@ them, with links, in your answer.
 
 - `type`, always, with the value the folder's notes use. A new kind gets a new,
   singular, kebab-case type.
-- `date: "{{date}}"` when the kind is dated; `{{user}}` wherever the vault records
-  who wrote a note. **`{{date}}` and `{{user}}` are the only placeholders** — the
+- `date: "{{date}}"` when the kind is dated; `{{time}}` (`HH:MM`) or
+  `{{datetime}}` (ISO 8601 with offset) when the moment matters, as in a log entry;
+  `{{user}}` wherever the vault records who wrote a note. **`{{date}}`, `{{time}}`,
+  `{{datetime}}` and `{{user}}` are the only placeholders** (plus `{{name}}` in a
+  folder template), all in the vault's zone — `now` shows that clock — and the
   server refuses anything else.
 - The keys the kind needs to be found and filtered later (`status`, `tags`,
   `project`, `attendees`), **left empty** rather than given example values. An
