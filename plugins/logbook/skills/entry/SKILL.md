@@ -46,8 +46,11 @@ table, and a raw note is never re-tagged after the fact.
 
 - The path carries **no extension**: `write` makes it `.mdx` itself (and keeps the
   `.md` or `.mdx` already there, so a bare name never starts a twin).
-- Date and time are in your context — don't guess them. `HHMM` (no colon — it's a
-  filename), so the name sorts chronologically.
+- Date and time come from the vault's clock: call `now`, whose `stamp` is the
+  `YYYY-MM-DD-HHMM` the name starts with (and `date`, `time` fill the note), in the
+  same zone its templates use. Only if the server has no `now` take them from your
+  context — never guess. `HHMM` (no colon — it's a filename), so the name sorts
+  chronologically.
 - **Check the path first** with `exec` (`ls entries/ | grep <YYYY-MM-DD-HHMM>`).
   If that exact name exists (same repo, same minute), suffix `-2`, `-3`, … A
   `write` at an existing path with `position: replace` **destroys** the note that
