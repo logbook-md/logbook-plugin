@@ -80,8 +80,9 @@ there, create it before the first document:
      not cover.
    - **The problem / the context** — what forced this to exist.
    - **How it actually works** — the mechanism, traced through the real code, in
-     the order the system executes it. Name files and symbols; a diagram in
-     mermaid or a table when the shape is not linear.
+     the order the system executes it. Name files and symbols; a diagram as
+     an artifact (`artifacts` gives a template; Mermaid is deprecated) or a
+     table when the shape is not linear.
    - **The constraints** — what could not be changed, and what imposed it.
    - **The trade-offs and the alternatives rejected**, each with the reason it
      was rejected. This is the highest-value section and the one nobody can

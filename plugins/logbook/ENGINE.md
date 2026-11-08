@@ -106,8 +106,17 @@ the note changed since. A dry run's answer carries that `version` for you.
 
 **Read the response, not just its `ok`.** `write` and `edit` return `warnings` for
 what landed but will not render — a `mermaid-parse-error` names the line of a
-fence mermaid cannot draw. The write is not refused for it, so nothing else will
-tell you.
+fence mermaid cannot draw, an `artifact-stripped` the line of something the app
+removes from an artifact. The write is not refused for either, so nothing else
+will tell you.
+
+**Draw diagrams as artifacts.** A diagram, chart or timeline is HTML and CSS in a
+` ```html artifact ` fence, drawn in the reader's theme, free to animate, with
+nothing in it run. Call `artifacts` for the rules and the theme's variables, and
+start from one of its templates (flow, sequence, donut, bars, gantt, kpis,
+cards). Mermaid is deprecated: write no new mermaid diagram (a write that adds one
+answers with a `mermaid-deprecated` suggestion), and leave the ones a note already
+has alone unless you are rewriting that diagram anyway.
 
 **Write a page to be scanned, not only read.** A person reads these in the Logbook
 app, which draws GitHub/Obsidian callouts as coloured boxes. A page longer than a
@@ -191,7 +200,7 @@ it may write to.
   - `docs/<topic>` (`type: document`) — the long form: design docs, architecture,
     deep analysis. `/logbook:document`, which bootstraps the folder on first use.
   - `flows/<repo>-<process>` (`type: flow`) — one process traced through the code
-    it really executes, as mermaid diagrams whose every node carries a
+    it really executes, as artifact diagrams whose every node carries a
     `file:line` anchor, pinned to a commit SHA so the page can be **re-verified
     mechanically** later. `/logbook:walkthrough`, which bootstraps the folder.
 

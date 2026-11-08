@@ -1,6 +1,6 @@
 ---
 name: walkthrough
-description: Trace a process through the real code and write it up as a flow document (flows/<repo>-<process>, type flow) in the Logbook vault — mermaid diagrams whose every node carries a code anchor (symbol + file:line), pinned to a commit SHA so the document can be mechanically re-verified later. Use when the user says "walkthrough", "flujo", "cómo funciona X por dentro", "traza el proceso", "/logbook:walkthrough", or asks how a service, repo or feature actually executes end to end.
+description: Trace a process through the real code and write it up as a flow document (flows/<repo>-<process>, type flow) in the Logbook vault — diagrams drawn as artifacts whose every node carries a code anchor (symbol + file:line), pinned to a commit SHA so the document can be mechanically re-verified later. Use when the user says "walkthrough", "flujo", "cómo funciona X por dentro", "traza el proceso", "/logbook:walkthrough", or asks how a service, repo or feature actually executes end to end.
 ---
 
 # logbook · walkthrough
@@ -115,37 +115,44 @@ path beats a read one.
 
 ### 4. Draw only what you can anchor
 
-A diagram is a plain ` ```mermaid ` fence — no library, no component. **Several small diagrams beat one large one** — each
-answers a question a reader actually has:
+A diagram is an **artifact**: HTML and CSS in a ` ```html artifact title="…" ` fence,
+which the app draws in the reader's theme and may animate, with nothing in it run.
+Mermaid is deprecated for new diagrams; a flow page that already has mermaid keeps
+it until someone rewrites the diagram. Start from a template rather than from
+nothing: `artifacts` lists them, and `artifacts` with `template` gives one's
+source to change. **Several small diagrams beat one large one** — each answers a
+question a reader actually has:
 
-| The process is… | Diagram |
+| The process is… | Template |
 |---|---|
-| A call crossing components / services | `sequenceDiagram` — participants are real modules, messages are real calls |
-| Branching, with decisions and error paths | `flowchart TD` |
-| An entity moving through states | `stateDiagram-v2` |
-| Writes across tables | `erDiagram`, limited to the tables this flow touches |
+| A call crossing components / services | `sequence` — lifelines are real modules, messages are real calls |
+| A chain of steps, one after another | `flow` — mark the step a reader should look at with `now` |
+| Branching, with decisions and error paths | one `flow` per path, each under the condition that takes it |
+| Writes across tables, or states an entity moves through | a table beside the diagram, until a template covers it |
 
 Rules, all of them enforced by the anchor table below:
 
-- **Every node id is an anchor id.** `H1`, `S2`, `Q1` — short, stable, and the
-  first column of the table. Never invent a node for symmetry.
+- **Every node is an anchor id.** `H1`, `S2`, `Q1` — short, stable, and the
+  first column of the table. Give the node's element `id="H1"` and show the id
+  in it (`<small>H1 · invoice.go:142</small>`), so a link `#H1` lands on it.
+  Never invent a node for symmetry.
 - **A node with no code behind it is marked as such**: an external API, a broker,
-  a human step, a scheduled trigger. Say it in the label (`(external)`), do not
-  silently draw it like the rest.
-- **An edge you could not resolve is drawn as one** — mermaid's dotted arrow
-  (`-->>`/`-.->`) with a label saying why (`async, consumer unresolved`). A
-  guessed solid arrow is the failure this whole skill exists to prevent.
+  a human step, a scheduled trigger. Say it in the label (`(external)`) and give
+  it a dashed border, do not silently draw it like the rest.
+- **An edge you could not resolve is drawn as one** — a dashed line
+  (`border-top-style: dashed` on the message or wire) with a label saying why
+  (`async, consumer unresolved`), and no travelling dot. A guessed solid arrow is
+  the failure this whole skill exists to prevent.
 - Label edges with the real call or the real message, not with prose.
-- Keep the palette out of it: the vault themes the diagram, and hand-picked
-  colours break in the other theme.
+- **Colour only through the theme's variables** (`--ink`, `--muted`, `--card`,
+  `--line`, `--accent`, `--series-1`…): a hand-picked colour breaks in the other
+  themes.
 
-After writing, **check the response's `warnings` for `kind: mermaid-parse-error`**
-— it names the line and what is wrong. The write lands anyway and the fence fails
-to render with no other sign, so fix it and `edit` again until the array is empty.
-The server's check is deliberately conservative — it never flags a diagram mermaid
-accepts, but it does not catch every one mermaid rejects — so the most reliable
-diagram is still a simple one: quote any label holding brackets
-(`A["f(x)"]`), and give every message in a `sequenceDiagram` its `: text`.
+After writing, **check the response's `warnings` for `kind: artifact-stripped`**
+— it names the line of something the app removes before drawing: a script, an
+`on…` handler, CSS that loads from the network, `@property`. The write lands
+anyway and the diagram draws without it, with no other sign, so fix it and `edit`
+again until the array is empty.
 
 ### 5. The anchor table — the section that makes the document verifiable
 

@@ -116,7 +116,8 @@ Two fields were retired in v0.2, and this vault still carries both on older page
 | `missing-type` | `okf` | No `type`, or a blank one, on a non-reserved page — the floor again. |
 | `no-wiki-links` | `okf` | A `[[wiki-link]]`: other OKF consumers render it as literal text and lose the edge. Use a markdown link. |
 | `dead-link` | `links` | Only from `audit`: a link whose target is not in the vault. |
-| `mermaid-parse-error` | `mermaid` | A fence mermaid will not draw. Also returned in `write`/`edit` `warnings`. |
+| `mermaid-parse-error` | `mermaid` | A fence mermaid will not draw. Also returned in `write`/`edit` `warnings`. Mermaid is deprecated for new diagrams. |
+| `artifact-stripped` | `artifact` | Something the app removes from an artifact before drawing it — a script, a handler, CSS that loads from the network. Also returned in `write`/`edit` `warnings`. |
 
 Only the first two make a bundle non-conformant; fix those first. The app's REST
 surface refuses to save a page that breaks the floor, but an MCP `write` is not
