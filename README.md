@@ -70,6 +70,7 @@ Invoked as `/logbook:<skill>`:
 | --- | --- | --- |
 | `entry` | `entries/` | One immutable note per unit of work. A `PostToolUse` hook suggests it after every `git commit`. |
 | `task` | `tasks/<repo>` | Capture, list and close pending work, anchored to the code it is about. |
+| `quick` | The quick notes | Jot a to-do or a passing thought on the pad the app keeps in a floating window; read it back, check tasks off. Needs a server with `quick_notes`. |
 | `ingest` | `wiki/` | Synthesize new notes into cross-linked pages. |
 | `query` | — | Answer from the wiki, filing what is worth keeping. |
 | `lint` | — | Report rot: conformance, dead links, orphans, contradictions. |
